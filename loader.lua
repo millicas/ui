@@ -109,17 +109,15 @@ function Histronia:CreateUI()
     LogoGradient.Rotation = 45
     LogoGradient.Parent = LogoFrame
 
-    -- Inner circle for logo
-    local LogoCircle = Instance.new("Frame")
-    LogoCircle.Size = UDim2.new(0, 50, 0, 50)
-    LogoCircle.Position = UDim2.new(0.5, -25, 0.5, -25)
-    LogoCircle.BackgroundColor3 = Color3.fromRGB(200, 70, 75)
-    LogoCircle.BorderSizePixel = 0
-    LogoCircle.Parent = LogoFrame
-
-    local CircleCorner = Instance.new("UICorner")
-    CircleCorner.CornerRadius = UDim.new(1, 0)
-    CircleCorner.Parent = LogoCircle
+    -- Custom Logo Image (Replaces the inner circle)
+    local LogoImage = Instance.new("ImageLabel")
+    LogoImage.Size = UDim2.new(0, 50, 0, 50)
+    LogoImage.Position = UDim2.new(0.5, -25, 0.5, -25)
+    LogoImage.BackgroundTransparency = 1
+    LogoImage.Image = "rbxassetid://139313061651478" -- Your custom logo
+    LogoImage.ImageColor3 = Color3.fromRGB(255, 255, 255) -- White
+    LogoImage.ScaleType = Enum.ScaleType.Fit
+    LogoImage.Parent = LogoFrame
 
     -- Title below logo
     local TitleLabel = Instance.new("TextLabel")
