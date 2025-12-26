@@ -88,22 +88,32 @@ function Histronia:CreateUI()
     SidebarCover.BorderSizePixel = 0
     SidebarCover.Parent = self.SidebarContainer
 
-    -- Logo/Icon at top - Transparent version
+    -- Logo/Icon at top - Enhanced with gradient background
     local LogoFrame = Instance.new("Frame")
-    LogoFrame.Size = UDim2.new(0, 80, 0, 80)
-    LogoFrame.Position = UDim2.new(0, 25, 0, 30)
-    LogoFrame.BackgroundTransparency = 1  -- Transparent background
+    LogoFrame.Size = UDim2.new(0, 90, 0, 90)
+    LogoFrame.Position = UDim2.new(0.5, -45, 0, 40)
+    LogoFrame.AnchorPoint = Vector2.new(0.5, 0)
+    LogoFrame.BackgroundColor3 = Color3.fromRGB(180, 60, 65)
     LogoFrame.BorderSizePixel = 0
     LogoFrame.Parent = self.SidebarContainer
 
     local LogoCorner = Instance.new("UICorner")
-    LogoCorner.CornerRadius = UDim.new(0, 20)
+    LogoCorner.CornerRadius = UDim.new(0, 22)
     LogoCorner.Parent = LogoFrame
+
+    -- Gradient effect for logo background
+    local LogoGradient = Instance.new("UIGradient")
+    LogoGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(220, 80, 85)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 60, 65))
+    }
+    LogoGradient.Rotation = 135
+    LogoGradient.Parent = LogoFrame
 
     -- Custom Logo Image
     local LogoImage = Instance.new("ImageLabel")
-    LogoImage.Size = UDim2.new(0, 50, 0, 50)
-    LogoImage.Position = UDim2.new(0.5, -25, 0.5, -25)
+    LogoImage.Size = UDim2.new(0, 55, 0, 55)
+    LogoImage.Position = UDim2.new(0.5, -27.5, 0.5, -27.5)
     LogoImage.BackgroundTransparency = 1
     LogoImage.Image = "rbxassetid://139313061651478" -- Your custom logo
     LogoImage.ImageColor3 = Color3.fromRGB(255, 255, 255) -- White
@@ -113,28 +123,31 @@ function Histronia:CreateUI()
     -- Title below logo
     local TitleLabel = Instance.new("TextLabel")
     TitleLabel.Name = "TitleLabel"
-    TitleLabel.Size = UDim2.new(1, -40, 0, 30)
-    TitleLabel.Position = UDim2.new(0, 20, 0, 120)
+    TitleLabel.Size = UDim2.new(1, -40, 0, 35)
+    TitleLabel.Position = UDim2.new(0.5, 0, 0, 145)
+    TitleLabel.AnchorPoint = Vector2.new(0.5, 0)
     TitleLabel.BackgroundTransparency = 1
-    TitleLabel.Text = self.Title
+    TitleLabel.Text = string.lower(self.Title)
     TitleLabel.TextColor3 = self.Theme.Text
-    TitleLabel.TextSize = 22
+    TitleLabel.TextSize = 24
     TitleLabel.Font = Enum.Font.GothamBold
-    TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    TitleLabel.TextXAlignment = Enum.TextXAlignment.Center
     TitleLabel.Parent = self.SidebarContainer
 
     -- Tab Container in sidebar
     self.TabContainer = Instance.new("Frame")
     self.TabContainer.Name = "TabContainer"
-    self.TabContainer.Size = UDim2.new(1, -40, 1, -200)
-    self.TabContainer.Position = UDim2.new(0, 20, 0, 170)
+    self.TabContainer.Size = UDim2.new(1, -30, 1, -230)
+    self.TabContainer.Position = UDim2.new(0.5, 0, 0, 200)
+    self.TabContainer.AnchorPoint = Vector2.new(0.5, 0)
     self.TabContainer.BackgroundTransparency = 1
     self.TabContainer.BorderSizePixel = 0
     self.TabContainer.Parent = self.SidebarContainer
 
     local TabList = Instance.new("UIListLayout")
     TabList.SortOrder = Enum.SortOrder.LayoutOrder
-    TabList.Padding = UDim.new(0, 8)
+    TabList.Padding = UDim.new(0, 10)
+    TabList.HorizontalAlignment = Enum.HorizontalAlignment.Center
     TabList.Parent = self.TabContainer
 
     -- Top bar with close button
@@ -254,17 +267,21 @@ function Histronia:AddTab(name, icon)
     -- Tab Button
     local TabButton = Instance.new("TextButton")
     TabButton.Name = name
-    TabButton.Size = UDim2.new(1, 0, 0, 45)
-    TabButton.BackgroundColor3 = self.Theme.Sidebar
+    TabButton.Size = UDim2.new(0, 220, 0, 50)
+    TabButton.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
     TabButton.BackgroundTransparency = 1
     TabButton.Text = ""
     TabButton.BorderSizePixel = 0
     TabButton.Parent = self.TabContainer
 
+    local ButtonCorner = Instance.new("UICorner")
+    ButtonCorner.CornerRadius = UDim.new(0, 14)
+    ButtonCorner.Parent = TabButton
+
     -- Icon
     local TabIcon = Instance.new("ImageLabel")
-    TabIcon.Size = UDim2.new(0, 20, 0, 20)
-    TabIcon.Position = UDim2.new(0, 15, 0.5, -10)
+    TabIcon.Size = UDim2.new(0, 22, 0, 22)
+    TabIcon.Position = UDim2.new(0, 18, 0.5, -11)
     TabIcon.BackgroundTransparency = 1
     TabIcon.Image = icon or "rbxassetid://3926305904" -- home icon
     TabIcon.ImageColor3 = self.Theme.SubText
@@ -272,28 +289,25 @@ function Histronia:AddTab(name, icon)
 
     -- Tab Label
     local TabLabel = Instance.new("TextLabel")
-    TabLabel.Size = UDim2.new(1, -50, 1, 0)
-    TabLabel.Position = UDim2.new(0, 45, 0, 0)
+    TabLabel.Size = UDim2.new(1, -55, 1, 0)
+    TabLabel.Position = UDim2.new(0, 50, 0, 0)
     TabLabel.BackgroundTransparency = 1
     TabLabel.Text = name
     TabLabel.TextColor3 = self.Theme.SubText
     TabLabel.TextSize = 15
-    TabLabel.Font = Enum.Font.Gotham
+    TabLabel.Font = Enum.Font.GothamMedium
     TabLabel.TextXAlignment = Enum.TextXAlignment.Left
     TabLabel.Parent = TabButton
 
-    -- Selection indicator
+    -- Selection indicator - Hidden initially
     local Indicator = Instance.new("Frame")
-    Indicator.Size = UDim2.new(0, 3, 0, 0)
+    Indicator.Size = UDim2.new(0, 0, 0, 0)
     Indicator.Position = UDim2.new(0, 0, 0.5, 0)
     Indicator.AnchorPoint = Vector2.new(0, 0.5)
     Indicator.BackgroundColor3 = self.Theme.Accent
     Indicator.BorderSizePixel = 0
+    Indicator.Visible = false
     Indicator.Parent = TabButton
-
-    local IndicatorCorner = Instance.new("UICorner")
-    IndicatorCorner.CornerRadius = UDim.new(1, 0)
-    IndicatorCorner.Parent = Indicator
 
     -- Tab Content
     local TabContent = Instance.new("ScrollingFrame")
@@ -337,22 +351,22 @@ function Histronia:AddTab(name, icon)
         function()
             for _, tab in pairs(self.Tabs) do
                 tab.Content.Visible = false
-                TweenService:Create(tab.Indicator, TweenInfo.new(0.3), {Size = UDim2.new(0, 3, 0, 0)}):Play()
+                TweenService:Create(tab.Button, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
                 TweenService:Create(tab.Icon, TweenInfo.new(0.3), {ImageColor3 = self.Theme.SubText}):Play()
                 TweenService:Create(tab.Label, TweenInfo.new(0.3), {TextColor3 = self.Theme.SubText}):Play()
             end
 
             TabContent.Visible = true
-            TweenService:Create(Indicator, TweenInfo.new(0.3), {Size = UDim2.new(0, 3, 0, 30)}):Play()
-            TweenService:Create(TabIcon, TweenInfo.new(0.3), {ImageColor3 = self.Theme.Accent}):Play()
+            TweenService:Create(TabButton, TweenInfo.new(0.3), {BackgroundTransparency = 0}):Play()
+            TweenService:Create(TabIcon, TweenInfo.new(0.3), {ImageColor3 = self.Theme.Text}):Play()
             TweenService:Create(TabLabel, TweenInfo.new(0.3), {TextColor3 = self.Theme.Text}):Play()
             self.CurrentTab = Tab
         end
     )
 
     if not self.CurrentTab then
-        Indicator.Size = UDim2.new(0, 3, 0, 30)
-        TabIcon.ImageColor3 = self.Theme.Accent
+        TabButton.BackgroundTransparency = 0
+        TabIcon.ImageColor3 = self.Theme.Text
         TabLabel.TextColor3 = self.Theme.Text
         TabContent.Visible = true
         self.CurrentTab = Tab
@@ -378,44 +392,44 @@ function Histronia:AddTab(name, icon)
     function Tab:AddButton(text, callback)
         local Button = Instance.new("TextButton")
         Button.Name = text
-        Button.Size = UDim2.new(1, 0, 0, 50)
-        Button.BackgroundColor3 = self.Theme.Secondary
+        Button.Size = UDim2.new(1, 0, 0, 55)
+        Button.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
         Button.Text = ""
         Button.BorderSizePixel = 0
         Button.Parent = TabContent
 
         local ButtonCorner = Instance.new("UICorner")
-        ButtonCorner.CornerRadius = UDim.new(0, 12)
+        ButtonCorner.CornerRadius = UDim.new(0, 14)
         ButtonCorner.Parent = Button
 
         local ButtonStroke = Instance.new("UIStroke")
-        ButtonStroke.Color = self.Theme.Accent
+        ButtonStroke.Color = Color3.fromRGB(50, 50, 55)
         ButtonStroke.Thickness = 1
-        ButtonStroke.Transparency = 0.9
+        ButtonStroke.Transparency = 0.7
         ButtonStroke.Parent = Button
 
         local ButtonLabel = Instance.new("TextLabel")
         ButtonLabel.Size = UDim2.new(1, -30, 1, 0)
-        ButtonLabel.Position = UDim2.new(0, 15, 0, 0)
+        ButtonLabel.Position = UDim2.new(0, 18, 0, 0)
         ButtonLabel.BackgroundTransparency = 1
         ButtonLabel.Text = text
         ButtonLabel.TextColor3 = self.Theme.Text
         ButtonLabel.TextSize = 14
-        ButtonLabel.Font = Enum.Font.Gotham
+        ButtonLabel.Font = Enum.Font.GothamMedium
         ButtonLabel.TextXAlignment = Enum.TextXAlignment.Left
         ButtonLabel.Parent = Button
 
         Button.MouseEnter:Connect(
             function()
-                TweenService:Create(Button, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(40, 40, 45)}):Play()
-                TweenService:Create(ButtonStroke, TweenInfo.new(0.2), {Transparency = 0.5}):Play()
+                TweenService:Create(Button, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(35, 35, 40)}):Play()
+                TweenService:Create(ButtonStroke, TweenInfo.new(0.2), {Transparency = 0.4}):Play()
             end
         )
 
         Button.MouseLeave:Connect(
             function()
-                TweenService:Create(Button, TweenInfo.new(0.2), {BackgroundColor3 = self.Theme.Secondary}):Play()
-                TweenService:Create(ButtonStroke, TweenInfo.new(0.2), {Transparency = 0.9}):Play()
+                TweenService:Create(Button, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(30, 30, 35)}):Play()
+                TweenService:Create(ButtonStroke, TweenInfo.new(0.2), {Transparency = 0.7}):Play()
             end
         )
 
@@ -432,36 +446,36 @@ function Histronia:AddTab(name, icon)
         local toggleState = default or false
 
         local ToggleFrame = Instance.new("Frame")
-        ToggleFrame.Size = UDim2.new(1, 0, 0, 50)
-        ToggleFrame.BackgroundColor3 = self.Theme.Secondary
+        ToggleFrame.Size = UDim2.new(1, 0, 0, 55)
+        ToggleFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
         ToggleFrame.BorderSizePixel = 0
         ToggleFrame.Parent = TabContent
 
         local ToggleCorner = Instance.new("UICorner")
-        ToggleCorner.CornerRadius = UDim.new(0, 12)
+        ToggleCorner.CornerRadius = UDim.new(0, 14)
         ToggleCorner.Parent = ToggleFrame
 
         local ToggleStroke = Instance.new("UIStroke")
-        ToggleStroke.Color = toggleState and self.Theme.Accent or self.Theme.Border
+        ToggleStroke.Color = toggleState and self.Theme.Accent or Color3.fromRGB(50, 50, 55)
         ToggleStroke.Thickness = 1
-        ToggleStroke.Transparency = 0.5
+        ToggleStroke.Transparency = 0.7
         ToggleStroke.Parent = ToggleFrame
 
         local ToggleLabel = Instance.new("TextLabel")
-        ToggleLabel.Size = UDim2.new(1, -70, 1, 0)
-        ToggleLabel.Position = UDim2.new(0, 15, 0, 0)
+        ToggleLabel.Size = UDim2.new(1, -80, 1, 0)
+        ToggleLabel.Position = UDim2.new(0, 18, 0, 0)
         ToggleLabel.BackgroundTransparency = 1
         ToggleLabel.Text = text
         ToggleLabel.TextColor3 = self.Theme.Text
         ToggleLabel.TextSize = 14
-        ToggleLabel.Font = Enum.Font.Gotham
+        ToggleLabel.Font = Enum.Font.GothamMedium
         ToggleLabel.TextXAlignment = Enum.TextXAlignment.Left
         ToggleLabel.Parent = ToggleFrame
 
         local ToggleButton = Instance.new("TextButton")
-        ToggleButton.Size = UDim2.new(0, 45, 0, 24)
-        ToggleButton.Position = UDim2.new(1, -60, 0.5, -12)
-        ToggleButton.BackgroundColor3 = toggleState and self.Theme.Accent or Color3.fromRGB(50, 50, 55)
+        ToggleButton.Size = UDim2.new(0, 50, 0, 26)
+        ToggleButton.Position = UDim2.new(1, -65, 0.5, -13)
+        ToggleButton.BackgroundColor3 = toggleState and self.Theme.Accent or Color3.fromRGB(45, 45, 50)
         ToggleButton.Text = ""
         ToggleButton.BorderSizePixel = 0
         ToggleButton.Parent = ToggleFrame
@@ -471,8 +485,8 @@ function Histronia:AddTab(name, icon)
         ToggleButtonCorner.Parent = ToggleButton
 
         local ToggleCircle = Instance.new("Frame")
-        ToggleCircle.Size = UDim2.new(0, 18, 0, 18)
-        ToggleCircle.Position = toggleState and UDim2.new(1, -21, 0.5, -9) or UDim2.new(0, 3, 0.5, -9)
+        ToggleCircle.Size = UDim2.new(0, 20, 0, 20)
+        ToggleCircle.Position = toggleState and UDim2.new(1, -23, 0.5, -10) or UDim2.new(0, 3, 0.5, -10)
         ToggleCircle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         ToggleCircle.BorderSizePixel = 0
         ToggleCircle.Parent = ToggleButton
@@ -488,21 +502,21 @@ function Histronia:AddTab(name, icon)
                     ToggleButton,
                     TweenInfo.new(0.2),
                     {
-                        BackgroundColor3 = toggleState and self.Theme.Accent or Color3.fromRGB(50, 50, 55)
+                        BackgroundColor3 = toggleState and self.Theme.Accent or Color3.fromRGB(45, 45, 50)
                     }
                 ):Play()
                 TweenService:Create(
                     ToggleCircle,
                     TweenInfo.new(0.2),
                     {
-                        Position = toggleState and UDim2.new(1, -21, 0.5, -9) or UDim2.new(0, 3, 0.5, -9)
+                        Position = toggleState and UDim2.new(1, -23, 0.5, -10) or UDim2.new(0, 3, 0.5, -10)
                     }
                 ):Play()
                 TweenService:Create(
                     ToggleStroke,
                     TweenInfo.new(0.2),
                     {
-                        Color = toggleState and self.Theme.Accent or self.Theme.Border
+                        Color = toggleState and self.Theme.Accent or Color3.fromRGB(50, 50, 55)
                     }
                 ):Play()
                 pcall(callback, toggleState)
@@ -665,17 +679,13 @@ function Histronia:AddTab(name, icon)
 
         Textbox.Focused:Connect(
             function()
-                TweenService:Create(TextboxStroke, TweenInfo.new(0.2), {Color = self.Theme.Accent, Transparency = 0.3}):Play(
-
-                )
+                TweenService:Create(TextboxStroke, TweenInfo.new(0.2), {Color = self.Theme.Accent, Transparency = 0.3}):Play()
             end
         )
 
         Textbox.FocusLost:Connect(
             function(enter)
-                TweenService:Create(TextboxStroke, TweenInfo.new(0.2), {Color = self.Theme.Border, Transparency = 0.5}):Play(
-
-                )
+                TweenService:Create(TextboxStroke, TweenInfo.new(0.2), {Color = self.Theme.Border, Transparency = 0.5}):Play()
                 if enter then
                     pcall(callback, Textbox.Text)
                 end
@@ -858,9 +868,7 @@ function Histronia:AddTab(name, icon)
                     local optionsHeight = math.min(#options * 34 + 8, 150)
                     OptionsFrame.Visible = true
                     Arrow.Text = "▲"
-                    TweenService:Create(OptionsFrame, TweenInfo.new(0.2), {Size = UDim2.new(1, -30, 0, optionsHeight)}):Play(
-
-                    )
+                    TweenService:Create(OptionsFrame, TweenInfo.new(0.2), {Size = UDim2.new(1, -30, 0, optionsHeight)}):Play()
                     TweenService:Create(
                         DropdownFrame,
                         TweenInfo.new(0.2),
