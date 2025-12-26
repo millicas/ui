@@ -88,7 +88,7 @@ function Histronia:CreateUI()
     SidebarCover.BorderSizePixel = 0
     SidebarCover.Parent = self.SidebarContainer
 
--- Logo/Icon at top - Only logo visible, transparent background
+-- Logo/Icon at top - Transparent with subtle glow
 local LogoFrame = Instance.new("Frame")
 LogoFrame.Size = UDim2.new(0, 80, 0, 80)
 LogoFrame.Position = UDim2.new(0, 25, 0, 30)
@@ -96,14 +96,26 @@ LogoFrame.BackgroundTransparency = 1  -- Make frame transparent
 LogoFrame.BorderSizePixel = 0
 LogoFrame.Parent = self.SidebarContainer
 
--- Custom Logo Image - Larger and centered
+-- Optional: Subtle glow effect around logo
+local Glow = Instance.new("ImageLabel")
+Glow.Size = UDim2.new(1, 10, 1, 10)
+Glow.Position = UDim2.new(0, -5, 0, -5)
+Glow.BackgroundTransparency = 1
+Glow.Image = "rbxassetid://8992230675"  -- Glow texture
+Glow.ImageColor3 = self.Theme.Accent
+Glow.ImageTransparency = 0.7
+Glow.ScaleType = Enum.ScaleType.Slice
+Glow.SliceCenter = Rect.new(100, 100, 100, 100)
+Glow.Parent = LogoFrame
+
+-- Custom Logo Image
 local LogoImage = Instance.new("ImageLabel")
-LogoImage.Size = UDim2.new(0, 80, 0, 80)  -- Full size of the frame
-LogoImage.Position = UDim2.new(0.5, -40, 0.5, -40)  -- Center it
-LogoImage.AnchorPoint = Vector2.new(0.5, 0.5)  -- Center anchor point
+LogoImage.Size = UDim2.new(0, 80, 0, 80)
+LogoImage.Position = UDim2.new(0.5, -40, 0.5, -40)
+LogoImage.AnchorPoint = Vector2.new(0.5, 0.5)
 LogoImage.BackgroundTransparency = 1
 LogoImage.Image = "rbxassetid://139313061651478"  -- Your custom logo
-LogoImage.ImageColor3 = Color3.fromRGB(255, 255, 255)  -- White
+LogoImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
 LogoImage.ScaleType = Enum.ScaleType.Fit
 LogoImage.Parent = LogoFrame
 
