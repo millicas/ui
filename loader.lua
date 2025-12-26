@@ -80,13 +80,7 @@ function Histronia:CreateUI()
     SidebarCorner.CornerRadius = UDim.new(0, 16)
     SidebarCorner.Parent = self.SidebarContainer
 
-    -- Cover right side of sidebar corner
-    local SidebarCover = Instance.new("Frame")
-    SidebarCover.Size = UDim2.new(0, 16, 1, 0)
-    SidebarCover.Position = UDim2.new(1, -16, 0, 0)
-    SidebarCover.BackgroundColor3 = self.Theme.Sidebar
-    SidebarCover.BorderSizePixel = 0
-    SidebarCover.Parent = self.SidebarContainer
+
 
     -- Logo/Icon at top
     local LogoFrame = Instance.new("Frame")
