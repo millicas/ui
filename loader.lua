@@ -80,38 +80,32 @@ function Histronia:CreateUI()
     SidebarCorner.CornerRadius = UDim.new(0, 16)
     SidebarCorner.Parent = self.SidebarContainer
 
+    -- Cover right side of sidebar corner
+    local SidebarCover = Instance.new("Frame")
+    SidebarCover.Size = UDim2.new(0, 16, 1, 0)
+    SidebarCover.Position = UDim2.new(1, -16, 0, 0)
+    SidebarCover.BackgroundColor3 = self.Theme.Sidebar
+    SidebarCover.BorderSizePixel = 0
+    SidebarCover.Parent = self.SidebarContainer
 
+-- Logo/Icon at top - Only logo visible, transparent background
+local LogoFrame = Instance.new("Frame")
+LogoFrame.Size = UDim2.new(0, 80, 0, 80)
+LogoFrame.Position = UDim2.new(0, 25, 0, 30)
+LogoFrame.BackgroundTransparency = 1  -- Make frame transparent
+LogoFrame.BorderSizePixel = 0
+LogoFrame.Parent = self.SidebarContainer
 
-    -- Logo/Icon at top
-    local LogoFrame = Instance.new("Frame")
-    LogoFrame.Size = UDim2.new(0, 80, 0, 80)
-    LogoFrame.Position = UDim2.new(0, 25, 0, 30)
-    LogoFrame.BackgroundColor3 = self.Theme.Accent
-    LogoFrame.BorderSizePixel = 0
-    LogoFrame.Parent = self.SidebarContainer
-
-    local LogoCorner = Instance.new("UICorner")
-    LogoCorner.CornerRadius = UDim.new(0, 20)
-    LogoCorner.Parent = LogoFrame
-
-    local LogoGradient = Instance.new("UIGradient")
-    LogoGradient.Color =
-        ColorSequence.new {
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(240, 100, 105)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 60, 65))
-    }
-    LogoGradient.Rotation = 45
-    LogoGradient.Parent = LogoFrame
-
-    -- Custom Logo Image (Replaces the inner circle)
-    local LogoImage = Instance.new("ImageLabel")
-    LogoImage.Size = UDim2.new(0, 50, 0, 50)
-    LogoImage.Position = UDim2.new(0.5, -25, 0.5, -25)
-    LogoImage.BackgroundTransparency = 1
-    LogoImage.Image = "rbxassetid://139313061651478" -- Your custom logo
-    LogoImage.ImageColor3 = Color3.fromRGB(255, 255, 255) -- White
-    LogoImage.ScaleType = Enum.ScaleType.Fit
-    LogoImage.Parent = LogoFrame
+-- Custom Logo Image - Larger and centered
+local LogoImage = Instance.new("ImageLabel")
+LogoImage.Size = UDim2.new(0, 80, 0, 80)  -- Full size of the frame
+LogoImage.Position = UDim2.new(0.5, -40, 0.5, -40)  -- Center it
+LogoImage.AnchorPoint = Vector2.new(0.5, 0.5)  -- Center anchor point
+LogoImage.BackgroundTransparency = 1
+LogoImage.Image = "rbxassetid://139313061651478"  -- Your custom logo
+LogoImage.ImageColor3 = Color3.fromRGB(255, 255, 255)  -- White
+LogoImage.ScaleType = Enum.ScaleType.Fit
+LogoImage.Parent = LogoFrame
 
     -- Title below logo
     local TitleLabel = Instance.new("TextLabel")
