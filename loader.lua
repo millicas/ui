@@ -88,34 +88,38 @@ function Histronia:CreateUI()
     SidebarCover.BorderSizePixel = 0
     SidebarCover.Parent = self.SidebarContainer
 
--- Logo/Icon at top - Transparent version but keeping layout
-local LogoFrame = Instance.new("Frame")
-LogoFrame.Size = UDim2.new(0, 80, 0, 80)
-LogoFrame.Position = UDim2.new(0, 25, 0, 30)
-LogoFrame.BackgroundTransparency = 1  -- Made transparent
-LogoFrame.BorderSizePixel = 0
-LogoFrame.Parent = self.SidebarContainer
+    -- Logo/Icon at top
+    local LogoFrame = Instance.new("Frame")
+    LogoFrame.Size = UDim2.new(0, 80, 0, 80)
+    LogoFrame.Position = UDim2.new(0, 25, 0, 30)
+    LogoFrame.BackgroundColor3 = self.Theme.Accent
+    LogoFrame.BorderSizePixel = 0
+    LogoFrame.Parent = self.SidebarContainer
 
-local LogoCorner = Instance.new("UICorner")
-LogoCorner.CornerRadius = UDim.new(0, 20)
-LogoCorner.Parent = LogoFrame
+    local LogoCorner = Instance.new("UICorner")
+    LogoCorner.CornerRadius = UDim.new(0, 20)
+    LogoCorner.Parent = LogoFrame
 
--- Optional: Subtle border to show where the logo area is (can remove if you want completely invisible)
-local LogoStroke = Instance.new("UIStroke")
-LogoStroke.Color = self.Theme.Accent
-LogoStroke.Thickness = 2
-LogoStroke.Transparency = 0.7  -- Semi-transparent border
-LogoStroke.Parent = LogoFrame
+    local LogoGradient = Instance.new("UIGradient")
+    LogoGradient.Color =
+        ColorSequence.new {
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(240, 100, 105)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 60, 65))
+    }
+    LogoGradient.Rotation = 45
+    LogoGradient.Parent = LogoFrame
 
--- Custom Logo Image (centered in the transparent frame)
-local LogoImage = Instance.new("ImageLabel")
-LogoImage.Size = UDim2.new(0, 50, 0, 50)
-LogoImage.Position = UDim2.new(0.5, -25, 0.5, -25)
-LogoImage.BackgroundTransparency = 1
-LogoImage.Image = "rbxassetid://139313061651478" -- Your custom logo
-LogoImage.ImageColor3 = Color3.fromRGB(255, 255, 255) -- White
-LogoImage.ScaleType = Enum.ScaleType.Fit
-LogoImage.Parent = LogoFrame
+    -- Inner circle for logo
+    local LogoCircle = Instance.new("Frame")
+    LogoCircle.Size = UDim2.new(0, 50, 0, 50)
+    LogoCircle.Position = UDim2.new(0.5, -25, 0.5, -25)
+    LogoCircle.BackgroundColor3 = Color3.fromRGB(200, 70, 75)
+    LogoCircle.BorderSizePixel = 0
+    LogoCircle.Parent = LogoFrame
+
+    local CircleCorner = Instance.new("UICorner")
+    CircleCorner.CornerRadius = UDim.new(1, 0)
+    CircleCorner.Parent = LogoCircle
 
     -- Title below logo
     local TitleLabel = Instance.new("TextLabel")
