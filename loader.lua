@@ -88,11 +88,11 @@ function Histronia:CreateUI()
     SidebarCover.BorderSizePixel = 0
     SidebarCover.Parent = self.SidebarContainer
 
-    -- Logo/Icon at top
+    -- Logo/Icon at top - Transparent version
     local LogoFrame = Instance.new("Frame")
     LogoFrame.Size = UDim2.new(0, 80, 0, 80)
     LogoFrame.Position = UDim2.new(0, 25, 0, 30)
-    LogoFrame.BackgroundColor3 = self.Theme.Accent
+    LogoFrame.BackgroundTransparency = 1  -- Transparent background
     LogoFrame.BorderSizePixel = 0
     LogoFrame.Parent = self.SidebarContainer
 
@@ -100,26 +100,15 @@ function Histronia:CreateUI()
     LogoCorner.CornerRadius = UDim.new(0, 20)
     LogoCorner.Parent = LogoFrame
 
-    local LogoGradient = Instance.new("UIGradient")
-    LogoGradient.Color =
-        ColorSequence.new {
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(240, 100, 105)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 60, 65))
-    }
-    LogoGradient.Rotation = 45
-    LogoGradient.Parent = LogoFrame
-
-    -- Inner circle for logo
-    local LogoCircle = Instance.new("Frame")
-    LogoCircle.Size = UDim2.new(0, 50, 0, 50)
-    LogoCircle.Position = UDim2.new(0.5, -25, 0.5, -25)
-    LogoCircle.BackgroundColor3 = Color3.fromRGB(200, 70, 75)
-    LogoCircle.BorderSizePixel = 0
-    LogoCircle.Parent = LogoFrame
-
-    local CircleCorner = Instance.new("UICorner")
-    CircleCorner.CornerRadius = UDim.new(1, 0)
-    CircleCorner.Parent = LogoCircle
+    -- Custom Logo Image
+    local LogoImage = Instance.new("ImageLabel")
+    LogoImage.Size = UDim2.new(0, 50, 0, 50)
+    LogoImage.Position = UDim2.new(0.5, -25, 0.5, -25)
+    LogoImage.BackgroundTransparency = 1
+    LogoImage.Image = "rbxassetid://139313061651478" -- Your custom logo
+    LogoImage.ImageColor3 = Color3.fromRGB(255, 255, 255) -- White
+    LogoImage.ScaleType = Enum.ScaleType.Fit
+    LogoImage.Parent = LogoFrame
 
     -- Title below logo
     local TitleLabel = Instance.new("TextLabel")
